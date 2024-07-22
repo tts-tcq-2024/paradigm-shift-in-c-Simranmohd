@@ -1,21 +1,41 @@
-#include <stdbool.h>
-
-bool isBatteryTemperatureOk(float temperature) {
-    return temperature >= 0 && temperature <= 45;
+#include <stdio.h>
+#include <assert.h>
+ 
+int is_Batterytemp_ok(float temp) {
+    return (temp >= 0 && temp <= 45);
 }
-
-bool isBatteryStateOfChargeOk(float soc) {
-    return soc >= 20 && soc <= 80;
+ 
+int is_Batterysoc_ok(float soc) {
+    return (soc >= 20 && soc <= 80);
 }
-
-bool isBatteryChargeRateOk(float chargeRate) {
-    return chargeRate <= 0.8;
+ 
+int is_Batterycharge_rate_ok(float chargeRate) {
+    return (chargeRate <= 0.8);
 }
-
-bool batteryIsOk(float temperature, float soc, float chargeRate) {
-    return isBatteryTemperatureOk(temperature) &&
-           isBatteryStateOfChargeOk(soc) &&
-           isBatteryChargeRateOk(chargeRate);
+ 
+//function to check overall battery Health
+int is_battery_ok(float temp, float soc, float chargeRate) {
+    if (is_Batterytemp_ok(temp) && is_Batterysoc_ok(soc) && is_charge_Batteryrate_ok(chargeRate))
+    {
+        return 1;
+    } else {
+        return 0;
+    }
 }
-
+ 
+int main() {
+    //Testcase1
+    if (is_battery_ok(20,70,0.7)) {
+        printf("Battery status: OK\n");
+    } else {
+        printf("Battery status: Warning - check parameters!\n");
+    }
+    //Testcase2
+    if (is_battery_ok(50,85,0)) {
+        printf("Battery status: OK\n");
+    } else {
+        printf("Battery status: Warning - check parameters!\n");
+    }
+    return 0;
+}
 
