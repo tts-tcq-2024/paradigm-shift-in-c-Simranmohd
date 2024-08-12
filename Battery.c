@@ -2,8 +2,8 @@
 #include "battery.h"
 
 // Function to check if the temperature is within range
-int Batterytemprange(float temp) {  
-  if(temp < 0 || temp > 45) {
+int isTemperatureInRange(float temp) {  
+  if(temp < MIN_TEMPERATURE || temp > MAX_TEMPERATURE) {
     printf("Temperature out of range\n");
     return 0;
   }
@@ -11,8 +11,8 @@ int Batterytemprange(float temp) {
 }
 
 // Function to check if the state of charge is within range
-int Batterysoc(float soc) {  
-  if(soc < 20 || soc > 80) {
+int isSocInRange(float soc) {  
+  if(soc < MIN_SOC || soc > MAX_SOC) {
     printf("State of Charge out of range\n");
     return 0;
   }
@@ -20,8 +20,8 @@ int Batterysoc(float soc) {
 }
 
 // Function to check if the charge rate is within range
-int Batterychargerate(float chargeRate) {   
-  if(chargeRate > 0.8) {
+int isChargeRateInRange(float chargeRate) {   
+  if(chargeRate > MAX_CHARGE_RATE) {
     printf("Charge Rate out of range\n");
     return 0;
   }
@@ -29,7 +29,6 @@ int Batterychargerate(float chargeRate) {
 }
 
 // Function to check if the battery is okay
-int batteryIsOk(float temp, float soc, float chargeRate) {
-    return ((Batterytemprange(temp)) && (Batterysoc(soc)) && (Batterychargerate(chargeRate)));
+int isBatteryOk(float temp, float soc, float chargeRate) {
+    return isTemperatureInRange(temp) && isSocInRange(soc) && isChargeRateInRange(chargeRate);
 }
-
